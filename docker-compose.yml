@@ -1,0 +1,28 @@
+version: '3.1'
+
+services:
+  mlfo:
+    image: golang:alpine
+    container_name: mlfo
+    restart: always
+    tty: true 
+    volumes:
+    - .:/go/src/mlfo-minimal
+    working_dir: /go/src/mlfo-minimal
+    #command: go run mlfo.go edge_intent.yaml
+    links:
+        - "db"
+
+  db:
+    image: mysql:8.0.21
+    container_name: db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mlfo1234
+      MYSQL_DATABASE: modelrepo
+    #command: mysql -uroot -pmlfo1234 modelrepo < modelrepo.sql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./modelrepo.sql:/modelrepo.sql 
+    
