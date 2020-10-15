@@ -26,4 +26,4 @@ Most of the errors might be fixed by stopping and restarting the containers:
 
 `docker stop mlfo db`
 
-`docker stop mlfo db`
+`docker kill mlfo db`
